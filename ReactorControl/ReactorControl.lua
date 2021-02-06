@@ -12,9 +12,9 @@ local tButtons = {
     Y = 0,
     W = 6,
     H = 4,
-    color = 0xcccccc,
-    colorDark = 0xaaaaaa,
-    textColor = 0xffffff,
+    color = 0x999999,
+    colorDark = 0x888888,
+    textColor = 0x444444,
     text = 'Exit',
     action = function()
       gpu.setBackground(b_color)
@@ -35,7 +35,7 @@ local function drawButton(n) -- функция рисования кнопки
 end
 
 local function drawCommandMenu()
-    gpu.setBackground(0xbbbbbb)
+    gpu.setBackground(0xaaaaaa)
     gpu.fill(1, 1, W, 3, ' ')
 end
 
@@ -59,13 +59,12 @@ local function blink(n) -- мигание кнопки
 end
 
 gpu.fill(1, 1, W, H, ' ') -- очищаем экран
-
+drawCommandMenu()
 for i = 1, #tButtons do
   toggleVisible(i) -- активируем каждую кнопку
 end
 
-while true do
-    drawCommandMenu()
+while true do 
   local tEvent = {pull_e('touch')} -- ждем клика
   for i = 1, #tButtons do -- перебираем все кнопки
     if tButtons[i].visible then -- если кнопка активна
