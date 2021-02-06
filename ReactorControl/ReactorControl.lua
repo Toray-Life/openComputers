@@ -8,7 +8,7 @@ local b_color, f_color = gpu.getBackground(), gpu.getForeground()
 local tButtons = {
   {
     visible = false,
-    X = W-2,
+    X = W-6,
     Y = 0,
     W = 6,
     H = 4,
