@@ -4,9 +4,24 @@ local computer = require('computer')
 local pull_e = require('event').pull
 local W, H = gpu.getResolution()
 local b_color, f_color = gpu.getBackground(), gpu.getForeground()
-
+local activeMenu
 local tButtons = {
-  {
+    {
+    visible = false,
+    X = 0,
+    Y = 0,
+    W = 12,
+    H = 4,
+    color = 0x999999,
+    colorDark = 0x888888,
+    textColor = 0x444444,
+    text = 'Main',
+    menu = 'Main',
+    action = function()
+        setMenuMain()
+    end
+    },
+    {
     visible = false,
     X = W-6,
     Y = 0,
@@ -16,14 +31,18 @@ local tButtons = {
     colorDark = 0x888888,
     textColor = 0x444444,
     text = 'Exit',
+    menu = 'Exit',
     action = function()
-      gpu.setBackground(b_color)
-      gpu.setForeground(f_color)
-      gpu.fill(1, 1, W, H, ' ')
-      os.exit()
-  end
-  }
+        gpu.setBackground(b_color)
+        gpu.setForeground(f_color)
+        gpu.fill(1, 1, W, H, ' ')
+        os.exit()
+    end
+    }
 }
+local function setMenuMain()
+
+end
 
 local function drawButton(n) -- функция рисования кнопки
   gpu.setBackground(tButtons[n].colorDark) -- задаем цвет кнопки
@@ -58,10 +77,12 @@ local function blink(n) -- мигание кнопки
   drawButton(n) -- перерисовываем кнопку
 end
 
-gpu.fill(1, 1, W, H, ' ') -- очищаем экран
-drawCommandMenu()
-for i = 1, #tButtons do
-  toggleVisible(i) -- активируем каждую кнопку
+local function update()
+    gpu.fill(1, 1, W, H, ' ') -- очищаем экран
+    drawCommandMenu()
+    for i = 1, #tButtons do
+    toggleVisible(i) -- активируем каждую кнопку
+    end
 end
 
 while true do 
