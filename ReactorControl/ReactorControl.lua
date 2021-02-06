@@ -76,7 +76,7 @@ local function blink(n) -- мигание кнопки
   tButtons[n].color, tButtons[n].textColor = tButtons[n].textColor, tButtons[n].color -- меняем цвета обратно
   drawButton(n) -- перерисовываем кнопку
 end
-
+update()
 local function update()
     gpu.fill(1, 1, W, H, ' ') -- очищаем экран
     drawCommandMenu()
